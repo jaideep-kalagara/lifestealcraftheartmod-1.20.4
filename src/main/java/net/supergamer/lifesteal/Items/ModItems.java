@@ -14,7 +14,7 @@ import net.supergamer.lifesteal.LifestealCraftHeartMod;
 public class ModItems {
 
 
-        public static final Item HEART = registerItem("heart", new HeartItem(new FabricItemSettings().maxDamage(1).fireproof()));
+        public static final Item HEART = registerItem("heart", new HeartItem(new FabricItemSettings().fireproof().maxCount(64)));
 
 
         private static void addItemToIngredientItemGroup(FabricItemGroupEntries entries) {

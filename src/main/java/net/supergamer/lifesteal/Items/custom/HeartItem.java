@@ -9,6 +9,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -23,11 +25,14 @@ public class HeartItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient()) {
-//            user.getInventory().main.clear();
-            user.getStackInHand(hand).damage(1, user,
-                    playerEntity -> playerEntity.sendToolBreakStatus(playerEntity.getActiveHand()));
+//            user.getStackInHand(hand).damage(1, user,
+//                    playerEntity -> playerEntity.sendToolBreakStatus(playerEntity.getActiveHand()));
             ClientPlayNetworking.send(ModMessages.HEART_ID, PacketByteBufs.create());
+            user.getStackInHand(hand).decrement(1);
+            world.playSound(null, user.getBlockPos(), SoundEvents.BLOCK_ANVIL_BREAK, SoundCategory.BLOCKS, 1f, 1f);
         }
+
+
 
         return super.use(world, user, hand);
     }
