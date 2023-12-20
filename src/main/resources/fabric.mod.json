@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "lifesteal",
+	"version": "${version}",
+	"name": "LifestealCraftHeartMod",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Supergamer10920"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/lifesteal/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.supergamer.lifesteal.LifestealCraftHeartMod"
+		],
+		"client": [
+			"net.supergamer.lifesteal.ClientLifestealCraftHeartMod"
+		],
+		"fabric-datagen": [
+			"net.supergamer.lifesteal.LifestealCraftHeartModDataGenerator"
+		]
+	},
+	"mixins": [
+		"lifesteal.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.3",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "r r",
+    "dtn",
+    " r "
+  ],
+  "key": {
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "t": {
+      "item": "minecraft:totem_of_undying"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "n": {
+      "item": "minecraft:ancient_debris"
+    }
+  },
+  "result": {
+    "item": "lifesteal:heart",
+    "count": 1
+  }
+}
