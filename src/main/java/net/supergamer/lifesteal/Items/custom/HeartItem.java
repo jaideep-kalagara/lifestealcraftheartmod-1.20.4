@@ -1,20 +1,18 @@
 package net.supergamer.lifesteal.Items.custom;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
+
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import net.supergamer.lifesteal.networking.ModMessages;
+import net.supergamer.lifesteal.LifestealCraftHeartMod;
 
 public class HeartItem extends Item {
 
@@ -25,11 +23,17 @@ public class HeartItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient()) {
-//            user.getStackInHand(hand).damage(1, user,
-//                    playerEntity -> playerEntity.sendToolBreakStatus(playerEntity.getActiveHand()));
-            ClientPlayNetworking.send(ModMessages.HEART_ID, PacketByteBufs.create());
-            user.getStackInHand(hand).decrement(1);
-            world.playSound(null, user.getBlockPos(), SoundEvents.BLOCK_ANVIL_BREAK, SoundCategory.BLOCKS, 1f, 1f);
+            EntityAttributeInstance healthAttribute = user.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+
+            if (healthAttribute != null) {
+                Identifier modifierId = new Identifier(LifestealCraftHeartMod.MOD_ID, "health_boost");
+
+                healthAttribute.setBaseValue(healthAttribute.getValue() + 2.0);
+                user.getStackInHand(hand).decrement(1);
+                user.getWorld().playSound(null, user.getBlockPos(), SoundEvents.BLOCK_ANVIL_BREAK, SoundCategory.BLOCKS, 1f, 1f);
+
+            }
+
         }
 
 

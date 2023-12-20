@@ -12,7 +12,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.supergamer.lifesteal.Items.ModItems;
-import net.supergamer.lifesteal.networking.ModMessages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +36,6 @@ public class LifestealCraftHeartMod implements ModInitializer {
 	public void onInitialize() {
 		ModItems.registerModItems();
 
-		ModMessages.registerC2SPackets();
 
 		ServerPlayerEvents.COPY_FROM.register((original, cloned, alive) -> {
 				EntityAttributeInstance oldhealthAttribute = original.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
