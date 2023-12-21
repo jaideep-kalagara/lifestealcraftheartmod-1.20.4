@@ -51,7 +51,6 @@ public class LifestealCraftHeartMod implements ModInitializer {
 
 			CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 					dispatcher.register(literal("withdraw")
-									.requires(source -> source.hasPermissionLevel(1))
 							.then(argument("amount", IntegerArgumentType.integer())
 									.executes(context -> {
 
@@ -64,7 +63,7 @@ public class LifestealCraftHeartMod implements ModInitializer {
 
 
 
-											if (value > healthAttribute.getValue() / 2) {
+											if (value >= healthAttribute.getValue() / 2) {
 												context.getSource().sendFeedback(() -> Text.literal("you do not have enough hearts"), false);
 											} else {
 												context.getSource().getPlayer().giveItemStack(ModItems.HEART.getDefaultStack().copyWithCount(value));
